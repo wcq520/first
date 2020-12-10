@@ -19,7 +19,7 @@
           <el-select v-model="form.second_cateid" placeholder="请选择">
             <el-option
               :label="item.catename"
-              :value="item.catename"
+              :value="item.id"
               v-for="item in secCate"
               :key="item.id"
             ></el-option>
@@ -51,7 +51,7 @@
         </el-form-item>
 
         <el-form-item label="商品规格" :label-width="formLabelWidth">
-          <el-select v-model="form.specsid" placeholder="请选择" @change="changeSpec">
+          <el-select v-model="form.specsid" placeholder="请选择" @change="changeSpec" >
             <el-option
               v-for="item in specList"
               :key="item.id"
@@ -170,7 +170,7 @@ export default {
       this.secSpec = this.specList.find((item) => {
         return item.id == this.form.specsid;
       }).attrs;
-      // console.log(this.secSpec);
+      this.form.specsattr=[];
     },
     ...mapActions({
       reqClassifyList: "classify/reqClassifyList",
@@ -183,7 +183,7 @@ export default {
     sure() {
       this.form.description = this.editor.txt.html()
       goodsAdd(this.form).then((res) => {
-        console.log(11);
+        console.log(this.form);
         this.hide();
         this.reqGoodsList();
       });
