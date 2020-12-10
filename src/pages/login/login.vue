@@ -18,6 +18,7 @@
 </template>
 <script>
 import { userLogin } from "../../util/request";
+import {mapGetters,mapActions} from 'vuex'
 export default {
   data() {
     return {
@@ -27,13 +28,23 @@ export default {
       },
     };
   },
+  computed:{
+    ...mapGetters({
+      list:'user/list'
+    })
+    
+  },
   methods: {
+    ...mapActions({
+      reqList:'user/reqList'
+    }),
     login() {
       userLogin(this.user).then((res) => {
         if (res.data.code == 200) {
-            // console.log(res.config.data.username);
+          this.reqList(res.data.list)
           this.$router.push("/index/home");
-          sessionStorage.setItem('list',JSON.stringify(res.data.list))
+          // console.log(list);
+          // sessionStorage.setItem('list',JSON.stringify(res.data.list))
         } else {
           alert(res.data.msg);
         }

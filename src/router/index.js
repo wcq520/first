@@ -70,7 +70,8 @@ export const secRouter=[
 
 ]
 
-export default new Router({
+
+const  router =new Router({
   routes: [
       {
         path:'/',
@@ -98,3 +99,17 @@ export default new Router({
       }
   ]
 })
+
+
+import store from '../store/index'
+router.beforeEach((to,form,next)=>{
+    if(to.path=='/' || to.path=='/login'){
+      next()
+    }
+      if(store.state.user.list.menus){
+        next()
+      }
+    
+})
+
+export default router

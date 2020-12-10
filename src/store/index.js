@@ -8,6 +8,8 @@ import roleList from './moudles/role'
 import manager from './moudles/manager'
 import classify from './moudles/classify'
 import spec from './moudles/spec'
+import user from './moudles/user'
+import goods from './moudles/goods'
 
 
 
@@ -17,7 +19,9 @@ export default new Vuex.Store({
         roleList,
         manager,
         classify,
-        spec
+        spec,
+        user,
+        goods
     }
 })
 

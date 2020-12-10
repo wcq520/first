@@ -260,3 +260,55 @@ export const userLogin=(data)=>{
         data:data
     })
 }
+
+
+// ==============================商品管理============================================
+
+// 商品添加
+export const goodsAdd=(data)=>{
+    const form=new FormData()
+    for(var i in data){
+        form.append(i,data[i])
+    }
+    return axios({
+        url:baseUrl+'/api/goodsadd',
+        method:'post',
+        data:form,
+    })
+}
+// 商品列表
+export const goodsList=(data)=>{
+    return axios({
+        url:baseUrl+'/api/goodslist',
+        method:'get',
+        data:data
+    })
+}
+// 查看商品的一条数据
+export const goodsOne=(params)=>{
+    return axios({
+        url:baseUrl+'/api/goodsinfo',
+        method:'get',
+        params:params
+    })
+}
+// 修改商品数据
+export const updateGoods=(data)=>{
+    const form =new FormData();
+    for(var i in data){
+        form.append(i,data[i])
+    }
+    return axios({
+        url:baseUrl+'/api/goodsedit',
+        method:'post',
+        data:form
+    })
+}
+// 删除商品数据
+export const delGoods=(data)=>{
+    return axios({
+        url:baseUrl+'/api/goodsdelete',
+        method:'post',
+        data:data
+    })
+}

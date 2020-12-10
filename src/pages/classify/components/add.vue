@@ -122,7 +122,7 @@ export default {
       })
     },
     update() {
-      console.log(this.form);
+      // console.log(this.form);
       updateClassify(this.form).then(res=>{
       })
       this.reqClassifyList()
