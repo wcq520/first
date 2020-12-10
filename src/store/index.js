@@ -10,6 +10,10 @@ import classify from './moudles/classify'
 import spec from './moudles/spec'
 import user from './moudles/user'
 import goods from './moudles/goods'
+import banner from './moudles/banner'
+import seckill from './moudles/seckill'
+
+
 
 
 
@@ -21,7 +25,9 @@ export default new Vuex.Store({
         classify,
         spec,
         user,
-        goods
+        goods,
+        banner,
+        seckill
     }
 })
 

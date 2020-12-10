@@ -21,6 +21,13 @@ export const secRouter=[
   path:'home',
   name:'主页',
   component:home,
+  beforeEnter: (to, from, next) => {
+    if(from.path==='/login' || from.path==='/' && store.state.user.list){
+        next()
+    }else{
+      next('/login')
+    }
+  }
 },
 {
   path:'banner',

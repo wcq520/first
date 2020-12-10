@@ -312,3 +312,93 @@ export const delGoods=(data)=>{
         data:data
     })
 }
+
+
+// =====================轮播图========================
+export const addBanner=(data)=>{
+    const form=new FormData();
+    for(var i in data){
+        form.append(i,data[i])
+    }
+    return axios({
+        url:baseUrl+'/api/banneradd',
+        method:'post',
+        data:form
+    })
+}
+// 轮播图列表
+export const bannerList=()=>{
+    return axios({
+        url:baseUrl+'/api/bannerlist',
+        method:'get',
+    })
+}
+// 轮播图查看一条数据
+export const bannerOne=(params)=>{
+    return axios({
+        url:baseUrl+'/api/bannerinfo',
+        method:'get',
+        params:params
+    })
+}
+// 修改轮播图数据
+export const updateBanner=(data)=>{
+    const form = new FormData();
+    for(var i in data){
+        form.append(i,data[i])
+    }
+    return axios({
+        url:baseUrl+'/api/banneredit',
+        method:'post',
+        data:form
+    })
+}
+// 删除轮播图
+export const delBanner=(data)=>{
+    return axios({
+        url:baseUrl+'/api/bannerdelete',
+        method:'post',
+        data:data
+    })
+}
+
+// ====================限时秒杀=========================
+export const seckillAdd=(data)=>{
+    return axios({
+        url:baseUrl+'/api/seckadd',
+        method:'post',
+        data:data
+    })
+}
+
+// 秒杀列表
+export const seckillList=()=>{
+    return axios({
+        url:baseUrl+'/api/secklist',
+        method:'get',
+    })
+}
+// 查看一条数据
+export const seckillOne=(params)=>{
+    return axios({
+        url:baseUrl+'/api/seckinfo',
+        method:'get',
+        params:params
+    })
+}
+// 修改抢购
+export const updateSeckill=(data)=>{
+    return axios({
+        url:baseUrl+'/api/seckedit',
+        method:'post',
+        data:data
+    })
+}
+// 删除抢购
+export const delSeckill=(data)=>{
+    return axios({
+        url:baseUrl+'/api/seckdelete',
+        method:'post',
+        data:data
+    })
+}

@@ -2,30 +2,18 @@
   <div>
     <el-dialog :title="info.title" :visible.sync="info.isShow">
       <el-form :model="form">
-        <el-form-item label="上级分类" :label-width="formLabelWidth">
-          <el-select v-model="form.pid" placeholder="请选择">
-            <el-option label="顶级菜单" value="0"></el-option>
-            <el-option
-              v-for="item in  list"
-              :key="item.id"
-              :label="item.catename"
-              :value="item.id"
-            ></el-option>
-          </el-select>
-        </el-form-item>
-
         <el-form-item label="分类名称" :label-width="formLabelWidth">
-          <el-input v-model="form.catename" autocomplete="off"></el-input>
+          <el-input v-model="form.title" autocomplete="off"></el-input>
         </el-form-item>
 
-        <el-form-item label="图片" :label-width="formLabelWidth" v-if="form.pid!=0">
+        <el-form-item label="图片" :label-width="formLabelWidth">
           <el-upload
             class="avatar-uploader"
             action="#"
             :show-file-list="false"
             :on-change="change"
           >
-            <img v-if="imgUrl" :src="imgUrl" class="avatar" />
+            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
@@ -53,71 +41,72 @@
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { classify ,classifyOne,updateClassify} from "../../../util/request";
+import { addBanner,bannerOne, updateBanner } from "../../../util/request";
 import qs from "qs";
 export default {
   props: ["info"],
   data() {
     return {
-      imgUrl:'',
+      imageUrl: "",
       form: {
-        pid: "",
-        catename: "",
+        title: "",
         img: "",
         status: 1,
       },
       formLabelWidth: "120px",
       dialogImageUrl: "",
       dialogVisible: false,
-      
     };
-    
   },
-  
+
   computed: {
     ...mapGetters({
-      list: "classify/classifyList",
+      list: "banner/list",
     }),
   },
   methods: {
-    empty(){
-      this.form={
-         pid: "",
-        catename: "",
+    empty() {
+      this.form = {
+        title: "",
         img: "",
         status: 1,
       },
-      this.imgUrl=''
+      this.imageUrl = "";
     },
     ...mapActions({
-      reqClassifyList:'classify/reqClassifyList'
+      reqBannerList: "banner/reqBannerList",
     }),
     hide() {
       this.info.isShow = false;
     },
     change(e) {
-      const file=e.raw
-      this.imgUrl= URL.createObjectURL(file);
-      this.form.img=file;
+      const file = e.raw;
+      this.imageUrl = URL.createObjectURL(file);
+      this.form.img = file;
     },
     sure() {
-      
+      addBanner(this.form).then((res) => {
+        this.hide();
+        this.reqBannerList()
+      });
     },
-    
-    look(id){
-      
+
+    look(id) {
+        bannerOne({id:id}).then(res=>{
+          this.form=res.data.list;
+          this.imageUrl='http://localhost:3000'+res.data.list.img
+          this.form.id=id
+        });
     },
     update() {
-      // console.log(this.form);
-      updateClassify(this.form).then(res=>{
-      })
-      this.reqClassifyList()
-      this.hide()
-      console.log(111);
+      updateBanner(this.form).then((res) => {
+        
+      });
+      this.reqBannerList();
+      this.hide();
     },
   },
-  mounted() {
-  },
+  mounted() {},
 };
 </script>
 <style scoped>
