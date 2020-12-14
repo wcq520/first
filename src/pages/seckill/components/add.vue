@@ -87,7 +87,8 @@ export default {
     }),
   },
   methods: {
-      change(){
+      change(){   
+        
           this.secCate=this.classifyList.find(item=>{
               return item.id==this.form.first_cateid
           }).children
