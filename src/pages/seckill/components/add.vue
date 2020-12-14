@@ -121,14 +121,16 @@ export default {
         })
     },
     update() {
-        this.form.begintime=Date.parse(this.value[0]);
+       this.form.begintime=Date.parse(this.value[0]);
         this.form.endtime=Date.parse(this.value[1])
         updateSeckill(this.form).then(res=>{
             this.hide();
             this.requestSeckillList()
         })
+         
     },
     look(id) {
+      this.value=[];
      seckillOne({id:id}).then(res=>{
         this.form=res.data.list;
         this.value.push(new Date(parseInt(this.form.begintime)));

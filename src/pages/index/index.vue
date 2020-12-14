@@ -19,7 +19,7 @@
 
 
           <div v-for='item in list.menus' :key="item.id">
-          <el-submenu :index="item.url" v-if='item.children'>
+          <el-submenu :index="item.title" v-if='item.children'>
             <template slot="title">
               <i class="el-icon-s-tools"></i>
               <span>{{item.title}}</span>
